@@ -1,0 +1,415 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+/*#icon-logo {
+	align-self: left !important;
+}*/
+
+body,html {
+	font-family: 'Inconsolata', 'Monaco', monospace;
+	overflow: hidden;
+	margin: 0;
+	color: #a0a2ae;
+	background-image: url("truenet_letter.png");
+	background: #282b2f;
+    	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	padding: 0;
+}
+
+/*query*/
+
+div #query{
+  
+  font-weight: 700;
+  font-smooth: auto;	
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 80px;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  width: 600px;
+}
+
+h2 {
+	
+  text-align: left;
+  font-size: 3em;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+  color: #26C165;
+  margin-top: 0;
+}
+
+span {
+  position: relative;
+  display: inline-block;
+  -webkit-animation: fadeInOut 3s ease-in-out infinite;
+          animation: fadeInOut 3s ease-in-out infinite;
+}
+
+@-webkit-keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    top: 20px;
+  }
+  40% {
+    opacity: 1;
+    top: 0px;
+  }
+  70% {
+    opacity: 1;
+    top: 0px;
+  }
+  100% {
+    opacity: 0;
+    top: -20px;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    top: 20px;
+  }
+  40% {
+    opacity: 1;
+    top: 0px;
+  }
+  70% {
+    opacity: 1;
+    top: 0px;
+  }
+  100% {
+    opacity: 0;
+    top: -20px;
+  }
+}
+
+
+/*query ends*/
+
+canvas{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  
+}
+
+.main-wrap {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	background-color: #282b2f;
+	background-image : url("truenet_letter.png");
+	background-repeat: no-repeat;
+	background-position: 50% 15em;
+	background-size: 40% auto;
+}
+
+
+.text-center {
+	text-align: center !important;
+}
+.info {
+	margin-bottom: 20px;
+}
+/* Buttons */
+
+.btn {
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+.btn:focus {
+	outline: none;
+}
+
+.btn--search {
+	font-size: 1.5em;
+}
+
+.btn--hidden {
+	pointer-events: none;
+	opacity: 0;
+}
+
+/* Links */
+
+a,
+.btn {
+	text-decoration: none;
+	color: #a0a2ae;
+	outline: none;
+}
+
+.hidden {
+	position: absolute;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	pointer-events: none;
+}
+
+
+/* Icons */
+
+.icon {
+	display: block;
+	width: 1.5em;
+	height: 1.5em;
+	margin: 0 auto;
+	fill: currentColor;
+}
+
+.search {
+	position: absolute;
+	z-index: 101;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none; /* makes other page elements clickable */
+}
+
+.js .search::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	background: rgba(14, 16, 15, 0.7);
+}
+
+.btn--search-close {
+	font-size: 2em;
+	position: absolute;
+	top: 1.25em;
+	right: 1.25em;
+	display: none;
+}
+
+.js .btn--search-close {
+	display: block;
+}
+
+.search__form {
+	position: relative;
+	width: 50%;
+	min-width: 300px;
+	margin: 0 auto;
+}
+
+.search__input {
+	border: 0;
+	background: transparent;
+	border-radius: 0;
+	-webkit-appearance: none;
+}
+
+.search__input:focus {
+	outline: none;
+}
+
+.search__input {
+	margin-top: 100px;
+	font-family: inherit;
+	font-size: 2em;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100% !important;
+	padding: 0 1em 0.15em 0;
+	pointer-events: auto;
+	color: #a0a2ae;
+	border-bottom: 4px solid;
+}
+
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+.search__input::-ms-clear {
+	display: none;
+}
+
+.btn--search {
+	margin-top: 100px;
+	font-size: 3em;
+	position: absolute;
+	right: 0;
+	bottom: 0.1em;
+	pointer-events: none;
+	color: #a0a2ae;
+}
+
+.search--open .btn--search {
+	pointer-events: auto;
+}
+
+.search__suggestion {
+	align-content: center;
+	width: 75%;
+	max-width: 800px;
+	margin: calc(10vh) auto 0;
+	text-align: left;
+	pointer-events: none;
+}
+
+.search__suggestion:nth-child(2) {
+	margin: 0 3em;
+}
+
+.search__suggestion h3 {
+	font-size: 1.5em;
+	margin: 0;
+}
+
+.search__suggestion h3::before {
+	display: inline-block;
+	padding: 0 0.5em 0 0;
+}
+
+.search__suggestion p {
+	font-size: 1.25em;
+	line-height: 1.4;
+	margin: 0.75em 0 0 0;
+	color: #e85454;
+}
+
+/************************/
+/* Transitions 			*/
+/************************/
+.js .search::before {
+	opacity: 0;
+	transition: opacity 0.5s;
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.js .search--open::before {
+	opacity: 1;
+}
+
+.search--open {
+	pointer-events: auto;
+	background-color: #282b2f !important;
+}
+
+.search__form {
+	transform: scale3d(0.5,0.5,1);
+	transition: transform 0.5s;
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.search--open .search__form {
+	transform: translate3d(0,20vh,0) translate3d(0,-50%,0);
+}
+
+.btn--search-close {
+	opacity: 0;
+	transform: scale3d(0.8, 0.8, 1);
+	transition: opacity 0.5s, transform 0.5s;
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.search--open .btn--search-close {
+	opacity: 1;
+	transform: scale3d(1, 1, 1);
+	transition-delay: 0.1s;
+}
+
+/* Dummy blocks */
+.search__suggestion div ,
+.search__suggestion h3,
+.search__suggestion p {
+	opacity: 0;
+	transform: translate3d(0, 100px, 0);
+	transition: opacity 0.2s, transform 0.5s;
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+
+
+.search--open .search__suggestion h3,
+.search--open .search__suggestion div ,
+.search--open .search__suggestion p {
+
+    
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+	transition: opacity 0.5s, transform 0.5s;
+	transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+
+
+.search--open .search__suggestion div #RES {
+      opacity :0;
+
+}
+
+.search--open .search__suggestion p {
+	transition-delay: 0.1s;
+}
+
+
+
+@media screen and (max-width: 40em) {
+	.search__form {
+		width: 100%;
+		padding: 2em 1em 0;
+	}
+	.search__input {
+		font-size: 2em;
+	}
+	.btn--search {
+		font-size: 1.25em;
+		right: 1em;
+	}
+	.btn--search-close {
+		font-size: 1.15em;
+	}
+	.search__suggestion {
+		font-size: 0.85em;
+		width: 100%;
+		margin-top: 0vh !important;
+		padding: 0 1em;
+	}
+}
+
+.query {
+	margin: 5px;
+}
+
+.top-searches {
+	margin-top: 50px;
+	text-align: center;
+}
+
+.search--open .top-searches {
+	opacity: 0.2;
+}
+
+.result {
+	margin-bottom: 10px;
+}
