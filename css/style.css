@@ -20,9 +20,18 @@ body,html {
 	padding: 0;
 }
 
+
+/*home*/
+
+#home{
+
+	visibility: visible;
+
+}
+
 /*query*/
 
-div #query{
+#query{
   
   font-weight: 700;
   font-smooth: auto;	
