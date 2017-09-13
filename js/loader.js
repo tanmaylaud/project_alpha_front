@@ -1,4 +1,4 @@
-$(window).load(function(){
+
 var $circles = $('.circle'),
     tl = new TimelineMax(),
     random1 = getRandomNumber(),
@@ -35,4 +35,4 @@ tl.insert(
     ease: Power1.easeOut
   }, 0.2), '-=0.4'
 )
-});
+;
