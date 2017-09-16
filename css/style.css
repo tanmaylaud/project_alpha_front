@@ -126,13 +126,21 @@ body,html {
     opacity: 0;
     top: 20px;
   }
-  40% {
+  20% {
+    opacity: 0;
+    top: 20px;
+  }
+  35% {
     opacity: 1;
     top: 0px;
   }
-  70% {
+  65% {
     opacity: 1;
     top: 0px;
+  }
+  80% {
+    opacity: 0;
+    top: -20px;
   }
   100% {
     opacity: 0;
@@ -145,13 +153,21 @@ body,html {
     opacity: 0;
     top: 20px;
   }
-  40% {
+  20% {
+    opacity: 0;
+    top: 20px;
+  }
+  35% {
     opacity: 1;
     top: 0px;
   }
-  70% {
+  65% {
     opacity: 1;
     top: 0px;
+  }
+  80% {
+    opacity: 0;
+    top: -20px;
   }
   100% {
     opacity: 0;
