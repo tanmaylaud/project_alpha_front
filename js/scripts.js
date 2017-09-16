@@ -1,9 +1,9 @@
 
 jQuery(window).on('load', (function() {
 	// will first fade out the loading animation
-jQuery("#status").fadeOut();
+	jQuery("#status").fadeOut();
 	// will fade out the whole DIV that covers the website.
-jQuery("#preloader").delay(1000).fadeOut();
+	jQuery("#preloader").delay(1000).fadeOut();
 }));
 
 var count = 0;
@@ -14,9 +14,9 @@ var query;
 function search()
 {   
 	document.getElementById("other-analysis").style.opacity='1';
-    document.getElementById("result").innerHTML=' ';
-     g=0;
-	 g = CustomJustGage("result", "Possibility");
+	document.getElementById("result").innerHTML=' ';
+	g=0;
+	g = CustomJustGage("result", "Possibility");
 	g.refresh(0);
 
 	clearInterval(interval);
@@ -57,9 +57,9 @@ function analyze()
 			text += "Anger: " + (anger/i).toFixed(2) + "%<br>";
 			text += "Disgust: " + (disgust/i).toFixed(2) + "%<br>";
 			text += "Fear: " + (fear/i).toFixed(2) + "%<br>";
-           
+
 			document.getElementById("Emotions").innerHTML = text;
-		
+
 
 			sentiment_val = (sentiment_val/i);
 			if(sentiment_val > 0)
@@ -108,7 +108,8 @@ function CustomJustGage(id, label)
 		//	bottomwidth: 1.5
 		//},
 		value: 0,
-		hideValue: true,
+		valueFontColor: "#a0a2ae",
+		hideValue: false,
 		min: 0,
 		max: 100,
 		donutStartAngle: 270,
