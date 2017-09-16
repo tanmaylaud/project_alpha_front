@@ -5,7 +5,7 @@
 	var closeCtrl = document.getElementById('btn-search-close'),
 	searchContainer = document.querySelector('.search'),
 	inputSearch = searchContainer.querySelector('.search__input'),
-	topSearches;
+	topSearches = '<div class="query row"><div class="col-sm-3"></div><div class="col-sm-4">Hello world, is this the basics?</div><div class="col-sm-2">95%</div><div class="col-sm-3"></div></div><div class="query row"><div class="col-sm-3"></div><div class="col-sm-4">Hello world, is this the basics?</div><div class="col-sm-2">95%</div><div class="col-sm-3"></div></div><div class="query row"><div class="col-sm-3"></div><div class="col-sm-4">Hello world, is this the basics?</div><div class="col-sm-2">95%</div><div class="col-sm-3"></div></div><div id="truenet-logo"><img class="img-responsive" src="img/truenet_letter.png" ></button></div></div>';
 
 	function init() {
 		initEvents();	

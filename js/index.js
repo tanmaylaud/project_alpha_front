@@ -24,11 +24,16 @@
         ctx = canvas.getContext( '2d' );
 
         // create points
+        var denom = 20;
+        if(width < 500)
+            denom = 10;
+        console.log(width);
+        console.log(denom);
         points = [];
-        for ( var x = 0; x < width; x = x + width / 20 ) {
-            for ( var y = 0; y < height; y = y + height / 20 ) {
-                var px = x + Math.random() * width / 20;
-                var py = y + Math.random() * height / 20;
+        for ( var x = 0; x < width; x = x + width / denom) {
+            for ( var y = 0; y < height; y = y + height / denom ) {
+                var px = x + Math.random() * width / denom;
+                var py = y + Math.random() * height / denom;
                 var p = {
                     x: px,
                     originX: px,
