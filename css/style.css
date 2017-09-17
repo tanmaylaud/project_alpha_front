@@ -4,12 +4,16 @@
 	box-sizing: border-box;
 }
 
+html { 
+	overflow-y: scroll !important; 
+}
+
 body,html {
 	font-family: 'Inconsolata', 'Monaco', monospace;
 	overflow: hidden;
 	margin: 0;
 	color: #a0a2ae;
-	background: #282b2f;
+	background: #222222;
     	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	padding: 0;
@@ -75,9 +79,9 @@ body,html {
 }
 
 #status  {
-	min-width: 300px;
-	min-height: 300px;
-	background-image: url('../img/preloader4.gif');
+	min-width: 200px;
+	min-height: 200px;
+	background-image: url('../img/preloader5.gif');
 	background-size: contain;	
 	background-repeat: no-repeat;
 	background-position: center;
@@ -205,7 +209,6 @@ canvas{
 	text-align: center !important;
 }
 .info {
-	margin-bottom: 20px;
 }
 /* Buttons */
 
@@ -497,7 +500,10 @@ a,
 /* Mobile View */
 
 @media screen and (max-width: 40em) {
-
+	#result {
+		transform: scale(0.9) !important;
+	}
+	
 	#truenet-logo{
 		max-width: 200px;
 	}
@@ -517,7 +523,7 @@ a,
 	}
 	
 	#input-query {
-		font-size: 0em !important;	
+		font-size: 1em !important;	
 	}
 	
 	.search__form {
@@ -542,7 +548,7 @@ a,
 		padding: 0 1em;
 	}
 	#query h2{
-		font-size: 2em;
+		font-size: 1.7em;
 	}
 }
 

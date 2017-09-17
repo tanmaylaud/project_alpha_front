@@ -1,4 +1,3 @@
-
 jQuery(window).on('load', (function() {
 	// will first fade out the loading animation
 	jQuery("#status").fadeOut();
