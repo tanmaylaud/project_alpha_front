@@ -1,4 +1,3 @@
-
 jQuery(window).on('load', (function() {
 	// will first fade out the loading animation
 	jQuery("#status").fadeOut();
@@ -60,6 +59,7 @@ function analyze()
 
 			document.getElementById("Emotions").innerHTML = text;
 
+
 			sentiment_val = (sentiment_val/i);
 			if(sentiment_val > 0)
 				text = "Positive";
@@ -69,9 +69,8 @@ function analyze()
 			document.getElementById("Entities").innerHTML = entities;
 
 			document.getElementById("other-analysis").style.opacity='1';
-			document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";
+			document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";			
 
-			document.getElementById("search-id").style.height = "auto";
 			loadChart([2.9, 7.5, 1.4, 1.2, 1.0, 1.0, 0, 0]);
 			document.getElementById("graph").style.opacity = '1';
 		},
@@ -85,7 +84,6 @@ function analyze()
 			document.getElementById("Emotions").innerHTML = "";
 			document.getElementById("Entities").innerHTML = "";
 			document.getElementById("other-analysis").style.opacity='0';
-			document.getElementById("graph").style.opacity = '0';
 		}
 	});
 }
@@ -110,7 +108,8 @@ function CustomJustGage(id, label)
 		//	bottomwidth: 1.5
 		//},
 		value: 0,
-		hideValue: true,
+		valueFontColor: "#a0a2ae",
+		hideValue: false,
 		min: 0,
 		max: 100,
 		donutStartAngle: 270,
@@ -130,4 +129,3 @@ function CustomJustGage(id, label)
 	});
 	return g;
 }
-
