@@ -1,4 +1,4 @@
-var chart = new Highcharts.Chart();
+var chart;
 
 function initChart() {
 	chart = new Highcharts.Chart({
@@ -69,7 +69,8 @@ function initChart() {
 		series: [{
 			data: [2.9, 7.5, 1.4, 1.2, 1.0, 1.0, 1.6, 1.5]
 		}]
-	});	
+	});
+	showValues();
 }
 
 function loadChart(dataVal) {
@@ -142,6 +143,7 @@ function loadChart(dataVal) {
 			data: dataVal
 		}]
 	});
+	showValues();
 }
 
 function showValues() {
@@ -156,5 +158,3 @@ $('#sliders input').on('input change', function () {
 	showValues();
 	chart.redraw(false);
 });
-
-showValues();
