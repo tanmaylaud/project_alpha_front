@@ -31,6 +31,7 @@
         
 		topSearches = document.getElementById('ts').innerHTML;
 		searchContainer.classList.add('search--open');
+		searchContainer.style.height = "auto";
 		inputSearch.focus();
 		document.getElementById('ts').innerHTML = "";
 
@@ -38,6 +39,7 @@
 
 	function closeSearch() {
 		searchContainer.classList.remove('search--open');
+		searchContainer.style.height = "";
 		inputSearch.blur();
 		inputSearch.value = '';
 		document.getElementById('ts').innerHTML = topSearches;
