@@ -65,13 +65,13 @@ function analyze()
 				text = "Positive";
 			else text = "Negative";
 
-			document.getElementById("Sentiment").innerHTML = text+ " " + sentiment_val.toFixed(2) + "%";
+			document.getElementById("Sentiment").innerHTML = text + " " + sentiment_val.toFixed(2) + "%";
 			document.getElementById("Entities").innerHTML = entities;
 
 			document.getElementById("other-analysis").style.opacity='1';
-			document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";			
+			document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";
 
-			loadChart([2.9, 7.5, 1.4, 1.2, 1.0, 1.0, 0, 0]);
+			loadChart(data['sources']);
 			document.getElementById("graph").style.opacity = '1';
 		},
 		error: function(data){
