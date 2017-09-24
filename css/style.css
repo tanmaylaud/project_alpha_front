@@ -4,19 +4,19 @@
 	box-sizing: border-box;
 }
 
-html { 
-	overflow-y: scroll !important; 
-}
-
 body,html {
 	font-family: 'Inconsolata', 'Monaco', monospace;
 	overflow: hidden;
 	margin: 0;
 	color: #a0a2ae;
-	background: #222222;
+	background: #282b2f;
     	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	padding: 0;
+}
+
+body {
+	overflow: auto;
 }
 
 #home{
@@ -78,10 +78,11 @@ body,html {
    height: 100%;
 }
 
+
 #status  {
-	min-width: 200px;
-	min-height: 200px;
-	background-image: url('../img/preloader5.gif');
+	min-width: 300px;
+	min-height: 300px;
+	background-image: url('../img/preloader4.gif');
 	background-size: contain;	
 	background-repeat: no-repeat;
 	background-position: center;
@@ -125,26 +126,34 @@ body,html {
           animation: fadeInOut 3s ease-in-out infinite;
 }
 
+#graph {
+    min-width: 310px; 
+    max-width: 800px;
+    margin: 0 auto;
+    height: 300px;
+    opacity: 0;
+}
+
+.highcharts-series{
+	color: #345224;
+}
+
+.highcharts-background{
+	opacity: 0;
+}
+
 @-webkit-keyframes fadeInOut {
   0% {
     opacity: 0;
     top: 20px;
   }
-  20% {
-    opacity: 0;
-    top: 20px;
-  }
-  35% {
+  40% {
     opacity: 1;
     top: 0px;
   }
-  65% {
+  70% {
     opacity: 1;
     top: 0px;
-  }
-  80% {
-    opacity: 0;
-    top: -20px;
   }
   100% {
     opacity: 0;
@@ -157,21 +166,13 @@ body,html {
     opacity: 0;
     top: 20px;
   }
-  20% {
-    opacity: 0;
-    top: 20px;
-  }
-  35% {
+  40% {
     opacity: 1;
     top: 0px;
   }
-  65% {
+  70% {
     opacity: 1;
     top: 0px;
-  }
-  80% {
-    opacity: 0;
-    top: -20px;
   }
   100% {
     opacity: 0;
@@ -188,7 +189,6 @@ canvas{
   left: 0;
   padding: 0;
   margin: 0;
-  
 }
 
 .main-wrap {
@@ -209,6 +209,7 @@ canvas{
 	text-align: center !important;
 }
 .info {
+	margin-bottom: 20px;
 }
 /* Buttons */
 
@@ -243,33 +244,7 @@ a,
 }
 
 .hidden {
-	position: absolute;/* Dummy blocks */
-	.search__suggestion div ,
-	.search__suggestion h3,
-	.search__suggestion p {
-		opacity: 0;
-		transform: translate3d(0, 100px, 0);
-		transition: opacity 0.2s, transform 0.5s;
-		transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-	}
-	
-	.search--open .search__suggestion h3,
-	.search--open .search__suggestion div ,
-	.search--open .search__suggestion p {
-		opacity: 1;
-		transform: translate3d(0, 0, 0);
-		transition: opacity 0.5s, transform 0.5s;
-		transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-	}
-	
-	.search--open .search__suggestion div #other-analysis {
-		  opacity :0;
-	}
-	
-	.search--open .search__suggestion p {
-		transition-delay: 0.1s;<!DOCTYPE html>
-	}
-	overflow: hidden;
+	position: absolute;
 	width: 0;
 	height: 0;
 	pointer-events: none;
@@ -421,6 +396,7 @@ a,
 .search--open {
 	pointer-events: auto;
 	background-color: #282b2f !important;
+	
 }
 
 .search__form {
@@ -500,10 +476,6 @@ a,
 /* Mobile View */
 
 @media screen and (max-width: 40em) {
-	#result {
-		transform: scale(0.9) !important;
-	}
-	
 	#truenet-logo{
 		max-width: 200px;
 	}
@@ -523,7 +495,7 @@ a,
 	}
 	
 	#input-query {
-		font-size: 1em !important;	
+		font-size: 0em !important;	
 	}
 	
 	.search__form {
@@ -548,7 +520,7 @@ a,
 		padding: 0 1em;
 	}
 	#query h2{
-		font-size: 1.7em;
+		font-size: 2em;
 	}
 }
 
