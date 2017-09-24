@@ -3,13 +3,14 @@
 
 <head>
 	<title>TrueNET</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="js/justgage.js"></script>
 	<script src="js/raphael-2.1.4.min.js"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 	<script src="js/loader.js"></script>
 	<script src="js/query.js"></script>
@@ -20,7 +21,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/loader.css">
+	<link rel="stylesheet" href="css/loader_style.css">
 
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="icon" href="img/truenet.png" type="image/png" />
@@ -48,71 +49,75 @@
 			</defs>
 		</svg>
 
-		<main class="main-wrap">
-			<div class="search">
+		<main class="main-wrap" id="main-id">
+			<div class="search" id="search-id">
 				<button id="btn-search-close" class="btn btn--search-close" aria-label="Close search form"><svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg></button>
 				<div class="search__form">
-					<input id="search-input" class="search__input" name="search" type="text" placeholder="" autocomplete="off" autocorrect="off"
-					 autocapitalize="off" spellcheck="false" />
+					<input id="search-input" class="search__input" name="search" type="text" placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
 					<button id="search-btn" class="btn btn--search" onclick="search()">
-				<img src="img/truenet.png" width="60px"></button>
-				</div>
-				<div id="ts" class="top-searches">
-					<div class="query row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-4">Hello world, is this the basics?</div>
-						<div class="col-sm-2">95%</div>
-						<div class="col-sm-3"></div>
+						<img src="img/truenet.png" width="60px"></button>
 					</div>
-					<div class="query row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-4">Hello world, is this the basics?</div>
-						<div class="col-sm-2">95%</div>
-						<div class="col-sm-3"></div>
-					</div>
-					<div class="query row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-4">Hello world, is this the basics?</div>
-						<div class="col-sm-2">95%</div>
-						<div class="col-sm-3"></div>
-					</div>
-					<div id="truenet-logo"><img class="img-responsive" src="img/truenet_letter.png"></button>
-					</div>
-				</div>
-				<div class="search__suggestion">
-					<div id="query">
-						<h2>Type in a query like.. <span id="adj" class="animated"></span></h2>
-					</div>
+					<div id="ts" class="top-searches">
+						<div class="query row">
+							<div class="col-sm-3"></div>
+							<div class="col-sm-4">Hello world, is this the basics?</div>
+							<div class="col-sm-2">95%</div>
+							<div class="col-sm-3"></div>
+						</div>
+						<div class="query row">
+							<div class="col-sm-3"></div>
+							<div class="col-sm-4">Hello world, is this the basics?</div>
+							<div class="col-sm-2">95%</div>
+							<div class="col-sm-3"></div>
+						</div>
+						<div class="query row">
+							<div class="col-sm-3"></div>
+							<div class="col-sm-4">Hello world, is this the basics?</div>
+							<div class="col-sm-2">95%</div>
+							<div class="col-sm-3"></div>
 
-					<div id="result"></div>
-					<div class="result-info">
-						<div id="other-analysis">
-							<div class="row">
-								<div class="text-center info col-lg-4 col-xs-4">
-									<h3>Sentiment</h3>
-									<div id="Sentiment" class="text-center "></div>
-								</div>
-								<div class="text-center info col-lg-4 col-xs-4">
-									<h3>Emotions</h3>
-									<div id="Emotions" class="text-center "></div>
-								</div>
-								<div class="text-center info col-lg-4 col-xs-4">
-									<h3>Entities</h3>
-									<div id="Entities" class="text-center"></div>
-								</div>
-							</div>
+						</div>
+						<div id="truenet-logo"><img class="img-responsive" src="img/truenet_letter.png"></button>
 						</div>
 					</div>
-					<div id="input-query"></div>
-				</div>
-			</div>
-		</main>
+					<div class="search__suggestion">
+						<div id="query">
+							<h2>Type in a query like.. <span id="adj" class="animated"></span></h2>
+						</div>
+						<div id="result"></div>
+						<div class="result-info">
+							<div id="other-analysis">
+								<div class="row">
+									<div class="text-center info col-lg-4 col-xs-12">
+										<h3>Sentiment</h3>
+										<div id="Sentiment" class="text-center "></div>
+									</div>
+									<div class="text-center info col-lg-4 col-xs-12">
+										<h3>Emotions</h3>
+										<div id="Emotions" class="text-center "></div>
+									</div>
+									<div class="text-center info col-lg-4 col-xs-12">
+										<h3>Entities</h3>
+										<div id="Entities" class="text-center"></div>
+									</div>
+								</div>
 
-		<canvas id="net"></canvas>
+							</div>
+
+							<div id="graph"></div>
+						</div>
+						<div id="input-query"></div>
+					</div>
+				</div>
+			</main>
+
+			<canvas id="net"></canvas>
 	</div>
+
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js'></script>
 
+	<script src="js/graph.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/search-box.js"></script>
 	<script src="js/scripts.js"></script>
