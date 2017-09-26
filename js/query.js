@@ -1,4 +1,4 @@
-var adjArray = ["Justin Bieber killed in stampede", "Terror attack in London", "Donald Trump is dead", "Emma Watson is pregnant"];
+var adjArray = ["Justin Bieber killed in stampede", "Terror attack in London", "RedBull contains semen of bull", "Emma Watson is pregnant"];
 
 var i = 0;
 

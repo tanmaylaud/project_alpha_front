@@ -1,7 +1,7 @@
 var chart;
 
 function loadChart(dataVal) {
-	var yAxisLabels = ['Fake', 'May be Fake' ,'Neutral','Probably True','True'];
+	var yAxisLabels = ['Fake', 'Probably Fake' ,'Neutral','Probably True','True'];
 	chart = new Highcharts.Chart({
 		chart: {
 			renderTo: 'graph',
@@ -20,15 +20,7 @@ function loadChart(dataVal) {
 		allowDecimals: false ,
 
 		xAxis: {
-			categories : ['TOI', 'DNA' ,'BSIndia','CNNNews','next1','next2','next3','next4'],
-
-			title: {
-				enabled: true,
-				text:'Sources',
-				style: {
-					fontWeight: 'normal'
-				}
-			}
+			categories : ['TOI', 'NDTV' , 'IndiaToday','CNNNews18', 'BSIndia', 'DNA', 'Breaking News','BBC']
 		},
 
 		yAxis: {
@@ -42,22 +34,19 @@ function loadChart(dataVal) {
 			},
 
 			title: {
-				enabled: true,
-				text:'Results',
-				style: {
-					fontWeight: 'normal'
-				} 
-
+				enabled: false,
 			}
 
 		},
 
 		title: {
-			text: 'Source Analysis'
+			text: 'Source Analysis',
+			style: {"color" : "#aaaaaa", "font-family": "Inconsolata", "font-size": "20px"}
 		},
 
 		credits: {
-			text: 'by Truenet'
+			text: '',
+			style: {"color" : "#aaaaaa"}
 		},
 
 		exporting: { enabled: false },
@@ -69,7 +58,7 @@ function loadChart(dataVal) {
 		plotOptions: {
 			column: {
 				depth: 25,
-				color: '#11CF68'
+				color: '#08a550'
 			}
 		},
 		series: [{

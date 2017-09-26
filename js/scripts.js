@@ -1,4 +1,4 @@
-jQuery(window).on('load', (function() {
+jQuery(window).on('load', (function () {
 	// will first fade out the loading animation
 	jQuery("#status").fadeOut();
 	// will fade out the whole DIV that covers the website.
@@ -6,75 +6,128 @@ jQuery(window).on('load', (function() {
 }));
 
 var count = 0;
-var g =0;
+var g = 0;
 var interval;
 var query;
 
-function search()
-{   
-	document.getElementById("other-analysis").style.opacity='1';
-	document.getElementById("result").innerHTML=' ';
-	g=0;
-	g = CustomJustGage("result", "Possibility");
+function search() {
+	document.getElementById("other-analysis").style.opacity = '1';
+	document.getElementById("result").innerHTML = ' ';
+	g = 0;
+	g = CustomJustGage("result", "");
 	g.refresh(0);
 
 	clearInterval(interval);
-	interval = setInterval(function() {
+	interval = setInterval(function () {
 		g.refresh((count += 100) % 200);
 	}, 1000);
 
-	setTimeout(function() {analyze()}, 0);
+	setTimeout(function () { analyze() }, 0);
+}
+function percentageToColor(percentage) {
+	if (percentage >= 75)
+		return "#2ecc71";
+	else if (percentage >= 55)
+		return "#f39c12";
+	else if (percentage >= 45)
+		return "#bbbbbb";
+	else if (percentage >= 25)
+		return "#f39c12";
+	else if (percentage >= 0)
+		return "#e74c3c";
 }
 
-function analyze()
-{   
-	document.getElementById("query").style.opacity='0';
-	query = {query: document.querySelector('.search').querySelector('.search__input').value};
+function percentageToText(percentage) {
+	if (percentage >= 75)
+		return "True";
+	else if (percentage >= 55)
+		return "Probably True";
+	else if (percentage >= 45)
+		return "Neutral";
+	else if (percentage >= 25)
+		return "Probably Fake";
+	else if (percentage >= 0)
+		return "Fake";
+}
+
+function analyze() {
+	document.getElementById("input-query").innerHTML = "";
+	document.getElementById("verdict").style.opacity = '0';
+	document.getElementById("h_graph").style.opacity = '0';
+	document.getElementById("graph").style.opacity = '0';
+	document.getElementById("query").style.opacity = '0';
+	document.getElementById("other-analysis").style.opacity = '0';
+	query = { query: document.querySelector('.search').querySelector('.search__input').value };
 	$.ajax({
 		url: "http://ryuzaki.pythonanywhere.com/api/v1/analyze",
 		type: "post",
 		contentType: "application/json; charset=UTF-8",
 		data: JSON.stringify(query),
 		datatype: 'json',
-		success: function(data){
-			console.log("success");
-			console.log(data);
-			clearInterval(interval);
-			g.refresh(data['percentage']);
-			joy=0;sadness=0;anger=0;disgust=0;fear=0;i=0;sentiment_val=0;entities="";
-			for(i = 0; i < data['entities'].length; ++i){
-				joy += data['entities'][i]['emotion']['joy']*100;
-				sadness += data['entities'][i]['emotion']['sadness']*100;
-				anger += data['entities'][i]['emotion']['anger']*100;
-				disgust += data['entities'][i]['emotion']['disgust']*100;
-				fear += data['entities'][i]['emotion']['fear']*100;
-				sentiment_val += data['entities'][i]['sentiment']['score'] * 100;
-				entities += data['entities'][i]['text'] + ": " + data['entities'][i]['type'] + "<br>";
+		success: function (data) {
+			document.getElementById("other-analysis").style.opacity = '1';
+			try {
+				console.log("success");
+				console.log(data);
+				clearInterval(interval);
+				g.refresh(data['percentage']);
+				document.getElementById("verdict").style.opacity = 1;
+				document.getElementById("verdict").style.color = percentageToColor(data['percentage']);
+				document.getElementById("verdict").innerHTML = percentageToText(data['percentage']);
+				if (data['entities'].length != 0)
+					my_key = 'entities';
+				else my_key = 'keywords';
+				joy = 0; sadness = 0; anger = 0; disgust = 0; fear = 0; i = 0; sentiment_val = 0; entities = "";
+				for (i = 0; i < data[my_key].length; ++i) {
+					joy += data[my_key][i]['emotion']['joy'] * 100;
+					sadness += data[my_key][i]['emotion']['sadness'] * 100;
+					anger += data[my_key][i]['emotion']['anger'] * 100;
+					disgust += data[my_key][i]['emotion']['disgust'] * 100;
+					fear += data[my_key][i]['emotion']['fear'] * 100;
+					sentiment_val += data[my_key][i]['sentiment']['score'] * 100;
+					if (my_key == 'entities')
+						entities += data[my_key][i]['text'] + ": " + data[my_key][i]['type'] + "<br>";
+					else
+						entities += data[my_key][i]['text'] + "<br>";
+				}
+
+				text = "Joy: " + (joy / i).toFixed(2) + "%<br>";
+				text += "Sadness: " + (sadness / i).toFixed(2) + "%<br>";
+				text += "Anger: " + (anger / i).toFixed(2) + "%<br>";
+				text += "Disgust: " + (disgust / i).toFixed(2) + "%<br>";
+				text += "Fear: " + (fear / i).toFixed(2) + "%<br>";
+
+				document.getElementById("Emotions").innerHTML = text;
+
+				sentiment_val = (sentiment_val / i);
+				if (sentiment_val > 0)
+					text = "Positive";
+				else text = "Negative";
+
+				document.getElementById("Sentiment").innerHTML = text + " " + sentiment_val.toFixed(2) + "%";
+				document.getElementById("Entities").innerHTML = entities;
+
+				document.getElementById("other-analysis").style.opacity = '1';
+				document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";
+
+				loadChart(data['sources']);
+				document.getElementById("h_graph").style.opacity = '1';
+				document.getElementById("graph").style.opacity = '1';
 			}
-			text = "Joy: " + (joy/i).toFixed(2) + "%<br>";
-			text += "Sadness: " + (sadness/i).toFixed(2) + "%<br>";
-			text += "Anger: " + (anger/i).toFixed(2) + "%<br>";
-			text += "Disgust: " + (disgust/i).toFixed(2) + "%<br>";
-			text += "Fear: " + (fear/i).toFixed(2) + "%<br>";
-
-			document.getElementById("Emotions").innerHTML = text;
-
-
-			sentiment_val = (sentiment_val/i);
-			if(sentiment_val > 0)
-				text = "Positive";
-			else text = "Negative";
-
-			document.getElementById("Sentiment").innerHTML = text + " " + sentiment_val.toFixed(2) + "%";
-			document.getElementById("Entities").innerHTML = entities;
-
-			document.getElementById("other-analysis").style.opacity='1';
-			document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";
-
-			loadChart(data['sources']);
-			document.getElementById("graph").style.opacity = '1';
+			catch (error) {
+				clearInterval(interval);
+				console.log(error);
+				loadChart(data['sources']);
+				document.getElementById("other-analysis").style.opacity = '0';
+				document.getElementById("h_graph").style.opacity = '1';
+				document.getElementById("graph").style.opacity = '1';
+				document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";
+				document.getElementById("Sentiment").innerHTML = "";
+				document.getElementById("Emotions").innerHTML = "";
+				document.getElementById("Entities").innerHTML = "";
+			}
 		},
-		error: function(data){
+		error: function (data) {
 			clearInterval(interval);
 			g.refresh(0);
 			console.log(data);
@@ -83,30 +136,24 @@ function analyze()
 			document.getElementById("Sentiment").innerHTML = "";
 			document.getElementById("Emotions").innerHTML = "";
 			document.getElementById("Entities").innerHTML = "";
-			document.getElementById("other-analysis").style.opacity='0';
+			document.getElementById("other-analysis").style.opacity = '0';
+			document.getElementById("verdict").style.opacity = '0';
+			document.getElementById("h_graph").style.opacity = '0';
 		}
 	});
 }
 
-$(document).ready(function(){
-	$("#search-input").keypress(function(e){
-		if(e.keyCode==13)
-		{
+$(document).ready(function () {
+	$("#search-input").keypress(function (e) {
+		if (e.keyCode == 13) {
 			$("#search-btn").click();
 		}
 	});
 });
 
-function CustomJustGage(id, label)
-{   
+function CustomJustGage(id, label) {
 	var g = new JustGage({
 		id: id,
-		//pointer: true,
-		//pointerOptions: {
-		//	toplength: 5,
-		//	bottomlength: 15,
-		//	bottomwidth: 1.5
-		//},
 		value: 0,
 		valueFontColor: "#a0a2ae",
 		hideValue: false,
@@ -122,9 +169,9 @@ function CustomJustGage(id, label)
 		labelMinFontSize: 100,
 		gaugeColor: "#f000",
 		levelColors: [
-		"#e74c3c",
-		"#f39c12",
-		"#2ecc71"
+			"#e74c3c",
+			"#f39c12",
+			"#2ecc71"
 		]
 	});
 	return g;

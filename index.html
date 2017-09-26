@@ -14,6 +14,7 @@
 	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
+	<script src="js/search_data.js"></script>
 	<script src="js/query.js"></script>
 
 	<script>
@@ -53,32 +54,13 @@
 			<div class="search" id="search-id">
 				<button id="btn-search-close" class="btn btn--search-close" aria-label="Close search form"><svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg></button>
 				<div class="search__form">
-					<input id="search-input" class="search__input" name="search" type="text" placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+					<input id="search-input" class="search__input" name="search" type="text" placeholder="" autocomplete="off" autocorrect="off"
+					 autocapitalize="off" spellcheck="false" />
 					<button id="search-btn" class="btn btn--search" onclick="search()">
 						<img src="img/truenet.png" width="60px">
 					</button>
 				</div>
 				<div id="ts" class="top-searches">
-					<div class="query row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-4">Hello world, is this the basics?</div>
-						<div class="col-sm-2">95%</div>
-						<div class="col-sm-3"></div>
-					</div>
-					<div class="query row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-4">Hello world, is this the basics?</div>
-						<div class="col-sm-2">95%</div>
-						<div class="col-sm-3"></div>
-					</div>
-					<div class="query row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-4">Hello world, is this the basics?</div>
-						<div class="col-sm-2">95%</div>
-						<div class="col-sm-3"></div>
-					</div>
-					<div id="truenet-logo"><img class="img-responsive" src="img/truenet_letter.png"></button>
-					</div>
 				</div>
 				<div class="search__suggestion">
 					<div id="query">
@@ -87,7 +69,14 @@
 
 					<div id="result"></div>
 					<div class="result-info">
+						<div id="verdict"></div>
+						<div id="input-query"></div>
+						<div id="h_graph">
+							<hr class="style-fade">
+							<div id="graph"></div>
+						</div>
 						<div id="other-analysis">
+							<hr class="style-fade">
 							<div class="row">
 								<div class="text-center info col-lg-4 col-xs-4">
 									<h3>Sentiment</h3>
@@ -103,9 +92,7 @@
 								</div>
 							</div>
 						</div>
-						<div id="graph"></div>
 					</div>
-					<div id="input-query"></div>
 				</div>
 			</div>
 		</main>
