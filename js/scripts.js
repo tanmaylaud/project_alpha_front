@@ -8,11 +8,33 @@ jQuery(window).on('load', (function () {
 var count = 0;
 var g = 0;
 var interval;
-var query;
+
+function countWords(s){
+    s = s.replace(/(^\s*)|(\s*$)/gi,"");	//exclude  start and end white-space
+    s = s.replace(/[ ]{2,}/gi," ");			//2 or more space to 1
+    s = s.replace(/\n /,"\n");				// exclude newline with a start spacing
+    return s.split(' ').length; 
+}
 
 function search() {
 	document.getElementById("other-analysis").style.opacity = '1';
 	document.getElementById("result").innerHTML = ' ';
+
+	var queryText = document.querySelector('.search').querySelector('.search__input').value
+
+	if(queryText.length < 10 || countWords(queryText) < 4)
+	{
+		document.getElementById("input-query").innerHTML = "<br><center>(" + queryText + ")</center>";
+		document.getElementById("result").innerHTML = "<br><center>Too short for checking.</center>";
+		document.getElementById("Sentiment").innerHTML = "";
+		document.getElementById("Emotions").innerHTML = "";
+		document.getElementById("Entities").innerHTML = "";
+		document.getElementById("other-analysis").style.opacity = '0';
+		document.getElementById("verdict").style.opacity = '0';
+		document.getElementById("h_graph").style.opacity = '0';
+		return;
+	}
+
 	g = 0;
 	g = CustomJustGage("result", "");
 	g.refresh(0);
@@ -22,7 +44,7 @@ function search() {
 		g.refresh((count += 100) % 200);
 	}, 1000);
 
-	setTimeout(function () { analyze() }, 0);
+	setTimeout(analyze(queryText), 0);
 }
 function percentageToColor(percentage) {
 	if (percentage >= 75)
@@ -50,14 +72,14 @@ function percentageToText(percentage) {
 		return "Fake";
 }
 
-function analyze() {
+function analyze(queryText) {
 	document.getElementById("input-query").innerHTML = "";
 	document.getElementById("verdict").style.opacity = '0';
 	document.getElementById("h_graph").style.opacity = '0';
 	document.getElementById("graph").style.opacity = '0';
 	document.getElementById("query").style.opacity = '0';
 	document.getElementById("other-analysis").style.opacity = '0';
-	query = { query: document.querySelector('.search').querySelector('.search__input').value };
+	var query = { query: queryText };
 	$.ajax({
 		url: "http://ryuzaki.pythonanywhere.com/api/v1/analyze",
 		type: "post",
@@ -108,7 +130,7 @@ function analyze() {
 				document.getElementById("Entities").innerHTML = entities;
 
 				document.getElementById("other-analysis").style.opacity = '1';
-				document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";
+				document.getElementById("input-query").innerHTML = "<br><center>(" + queryText + ")</center>";
 
 				loadChart(data['sources']);
 				document.getElementById("h_graph").style.opacity = '1';
@@ -117,11 +139,10 @@ function analyze() {
 			catch (error) {
 				clearInterval(interval);
 				console.log(error);
-				loadChart(data['sources']);
 				document.getElementById("other-analysis").style.opacity = '0';
 				document.getElementById("h_graph").style.opacity = '1';
 				document.getElementById("graph").style.opacity = '1';
-				document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";
+				document.getElementById("input-query").innerHTML = "<br><center>(" + queryText + ")</center>";
 				document.getElementById("Sentiment").innerHTML = "";
 				document.getElementById("Emotions").innerHTML = "";
 				document.getElementById("Entities").innerHTML = "";
@@ -131,7 +152,7 @@ function analyze() {
 			clearInterval(interval);
 			g.refresh(0);
 			console.log(data);
-			document.getElementById("input-query").innerHTML = "<br><center>(" + query["query"] + ")</center>";
+			document.getElementById("input-query").innerHTML = "<br><center>(" + queryText + ")</center>";
 			document.getElementById("result").innerHTML = "<br><center>Kindly reframe your query with better grammer.</center>";
 			document.getElementById("Sentiment").innerHTML = "";
 			document.getElementById("Emotions").innerHTML = "";
@@ -169,9 +190,9 @@ function CustomJustGage(id, label) {
 		labelMinFontSize: 100,
 		gaugeColor: "#f000",
 		levelColors: [
-			"#e74c3c",
-			"#f39c12",
-			"#2ecc71"
+		"#e74c3c",
+		"#f39c12",
+		"#2ecc71"
 		]
 	});
 	return g;
