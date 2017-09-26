@@ -1,5 +1,9 @@
 search_results = [
     {
+        query: "Search History",
+        res: "Result"
+    },
+    {
         query: "RedBull contains semen of bull",
         res: "Fake"
     },
