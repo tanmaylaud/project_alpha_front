@@ -153,7 +153,7 @@ function analyze(queryText) {
 			g.refresh(0);
 			console.log(data);
 			document.getElementById("input-query").innerHTML = "<br><center>(" + queryText + ")</center>";
-			document.getElementById("result").innerHTML = "<br><center>Kindly reframe your query with better grammar.</center>";
+			document.getElementById("result").innerHTML = "<br><center>Something broke! Please try again after some time.</center>";
 			document.getElementById("Sentiment").innerHTML = "";
 			document.getElementById("Emotions").innerHTML = "";
 			document.getElementById("Entities").innerHTML = "";
