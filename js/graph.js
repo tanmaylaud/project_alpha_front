@@ -45,8 +45,9 @@ function loadChart(dataVal) {
 		},
 
 		credits: {
-			text: '',
-			style: {"color" : "#aaaaaa"}
+			text: '(The above analysis is what we derive from the sources and not what the sources themself have claimed or stated.)',
+			style: {"color" : "#aaaaaa"},
+			position: { "align" : "center" }
 		},
 
 		exporting: { enabled: false },
